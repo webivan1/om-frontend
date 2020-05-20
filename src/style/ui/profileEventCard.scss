@@ -1,0 +1,48 @@
+.profile-event-card {
+  position: relative;
+  color: black;
+
+  &.draft {
+    .profile-event-card-img {
+      background: $gray-300;
+    }
+  }
+
+  &.moderation {
+    .profile-event-card-img {
+      background: lighten($warning, 19%);
+    }
+  }
+
+  &.reject {
+    .profile-event-card-img {
+      background: lighten($danger, 19%);
+    }
+  }
+
+  &.approved {
+    .profile-event-card-img {
+      background: lighten($success, 19%);
+    }
+  }
+
+  &-img {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 70%;
+    border-radius: 40% 15% 30% 8%;
+    transform: rotate3d(-1, 0, 1, 60deg);
+
+    &:before {
+      content: " ";
+      padding-top: 100%;
+      float: left;
+    }
+  }
+
+  &-title {
+
+  }
+}

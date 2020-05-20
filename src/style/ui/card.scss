@@ -1,0 +1,25 @@
+.card {
+  //box-shadow: 0 1px 1px 0 rgba(60,75,100,.14), 0 2px 1px -1px rgba(60,75,100,.12), 0 1px 3px 0 rgba(60,75,100,.2);
+}
+
+.circle-effect {
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 100%;
+    left: 0;
+    top: 0;
+    transform: translate(-30%, -30%);
+  }
+
+  .card-body {
+    position: relative;
+    z-index: 1;
+  }
+}
