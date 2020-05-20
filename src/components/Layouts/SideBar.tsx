@@ -25,7 +25,7 @@ export const SideBar: FC = () => {
         <div className="sidebar-content p-4">
           <h1 className="sidebar-content-top display-5 font-weight-bolder text-white mb-4">
             <Link to={'/'} className="sidebar-content-logo">
-              Our<span className="text-warning">Rights</span>
+              OurRights
               <span className="d-block text-secondary mt-1">
                 Онлайн митинги
               </span>
