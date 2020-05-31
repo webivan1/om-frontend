@@ -23,6 +23,7 @@
     "animate.css": "^3.7.2",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "device-uuid": "^1.0.4",
     "google-map-react": "^1.1.7",
     "leaflet": "^1.6.0",
     "leaflet.markercluster": "^1.4.1",

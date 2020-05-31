@@ -12,7 +12,7 @@ export const EventFinished: FC<EventPropTypes> = ({ event }: EventPropTypes) => 
   return (
     <div>
       <p className="lead">
-        Митинг заканчился {finishDate}
+        Митинг закончился {finishDate}
       </p>
 
       <EventChart event={event} />

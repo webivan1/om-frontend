@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Button, Spinner } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { Content } from "../../../Layouts/Content";
 import { EventList } from "./List/EventList";
 import { EventFilterForm } from "./List/EventFilterForm";
@@ -35,7 +36,9 @@ const Heading: FC<HeadingPropTypes> = ({ total, loader, reloadList }: HeadingPro
           <FontAwesomeIcon icon={faSync} />
         </Button>
 
-        <Button>Добавить</Button>
+        <Button as={Link} to={'/profile/events/add'}>
+          Добавить
+        </Button>
       </div>
     </div>
   </>
@@ -60,7 +63,10 @@ export const ProfileEvents: FC = () => {
         reloadList={handleReloadList}
       />
 
-      <EventFilterForm onSubmit={handleSearchForm} />
+      <EventFilterForm
+        loader={loader}
+        onSubmit={handleSearchForm}
+      />
 
       <EventList items={items} />
 

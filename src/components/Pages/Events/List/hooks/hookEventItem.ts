@@ -15,7 +15,7 @@ export const useEventItem = (item: EventType) => {
 
   const [params, setParams] = useState<ParamColorsType>({
     card: {
-      bg: 'success',
+      bg: 'warning',
       text: 'light'
     },
     badge: {
@@ -32,6 +32,16 @@ export const useEventItem = (item: EventType) => {
         },
         badge: {
           variant: 'dark'
+        }
+      })
+    } else if (isStarted && !isFinished) {
+      setParams({
+        card: {
+          bg: 'success',
+          text: 'light'
+        },
+        badge: {
+          variant: 'primary'
         }
       })
     }

@@ -9,9 +9,10 @@ import { EventStatuses, EventStatusLabels } from "../../../../../store/events/ty
 
 type PropTypes = {
   onSubmit: (form: EventFilterParamsType) => void;
+  loader: boolean;
 }
 
-export const EventFilterForm: FC<PropTypes> = ({ onSubmit }: PropTypes) => {
+export const EventFilterForm: FC<PropTypes> = ({ onSubmit, loader }: PropTypes) => {
 
   const {
     hookForm: { register, handleSubmit },
@@ -45,13 +46,13 @@ export const EventFilterForm: FC<PropTypes> = ({ onSubmit }: PropTypes) => {
             <Form.Label>Регион</Form.Label>
             <Form.Control
               as="select"
-              name="regionSlug"
+              name="region"
               ref={register<FormControl & HTMLSelectElement>()}
             >
               <option value="">Все</option>
 
-              {regions.map(({ label, slug }) => (
-                <option value={slug} key={slug}>{label}</option>
+              {regions.map(({ label, id }) => (
+                <option value={id} key={id}>{label}</option>
               ))}
             </Form.Control>
           </Form.Group>
@@ -85,7 +86,11 @@ export const EventFilterForm: FC<PropTypes> = ({ onSubmit }: PropTypes) => {
       </Row>
 
       <div>
-        <Button type="submit" variant="info">Найти</Button>
+        <Button
+          disabled={loader}
+          type="submit"
+          variant="info"
+        >Найти</Button>
       </div>
     </Form>
   )

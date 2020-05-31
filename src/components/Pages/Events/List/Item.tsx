@@ -42,7 +42,7 @@ export const Item: FC<PropTypes> = ({ item }: PropTypes) => {
               Принять участие
             </Button>
           ) : (
-            <Button as={Link} to={detailUrl} variant="success" className="depth-1">
+            <Button as={Link} to={detailUrl} variant="warning" className="depth-1">
               Приму участие
             </Button>
           )

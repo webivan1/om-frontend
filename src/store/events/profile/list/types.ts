@@ -5,7 +5,7 @@ export type EventListType = ListParamsType<EventType>;
 
 export type EventFilterParamsType = {
   status?: keyof typeof EventStatuses | '';
-  regionSlug?: string;
+  region?: number|string;
   isEventOnline?: boolean|1|0;
   isEventFinished?: boolean|1|0;
   title?: string;

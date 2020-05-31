@@ -21,6 +21,7 @@ export type UserStateType = {
   user: UserModelType|null;
   token: string|null;
   expired: number|null;
+  userUuid: string;
 }
 
 export enum UserResponseStatuses {

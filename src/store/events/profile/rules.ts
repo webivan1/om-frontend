@@ -10,11 +10,7 @@ export const isRemove = (item: EventType): boolean => {
     const currentDate = moment().utcOffset(item.timezoneUTC).valueOf();
     const meetingStart = moment(new Date(item.startAt)).subtract(3, 'days').valueOf();
 
-    if (currentDate >= meetingStart) {
-      return false;
-    }
-
-    return true;
+    return currentDate < meetingStart;
   }
 
   throw new Error(`${item.status} undefined status`);

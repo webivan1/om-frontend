@@ -3,6 +3,7 @@ import { EventPropTypes } from "../types";
 import { Card, Col, Row } from "react-bootstrap";
 
 import { Map } from "../../../../Map/LeafletMap";
+import { DetectUser } from "../../../../DetectUser/DetectUser";
 
 export const EventStarting: FC<EventPropTypes> = ({ event, timeToFinish }: EventPropTypes) => {
 
@@ -10,6 +11,8 @@ export const EventStarting: FC<EventPropTypes> = ({ event, timeToFinish }: Event
 
   return (
     <div>
+      <DetectUser event={event} />
+
       <Row className="justify-content-between">
         <Col md="auto">
           <p>Кол-во участников: {total}</p>

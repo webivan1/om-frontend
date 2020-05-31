@@ -3,14 +3,26 @@ import { SocketEmitEvents, SocketListenEvents } from "./constants";
 import { ComputeBoundsType } from "../../services/coords/types";
 import { PointUserType } from "./types";
 import { EventType } from "../../store/events/types";
+import { computeBounds } from "../../services/coords/coords";
 
-export const createQueryParams = (event: EventType) => ({
-  eventId: event.id,
-  duration: event.interval,
-  finishedAt: event.finishAt,
-  startAt: event.startAt,
-  timezone: event.timezoneUTC
-});
+export const createQueryParams = (event: EventType) => {
+  const border = computeBounds({
+    lat: event.region.lat,
+    lng: event.region.lng
+  }, event.region.distance);
+
+  return {
+    eventId: event.id,
+    duration: event.interval,
+    finishedAt: event.finishAt,
+    startAt: event.startAt,
+    timezone: event.timezoneUTC,
+    borderFromLat: border.from.lat,
+    borderFromLng: border.from.lng,
+    borderToLat: border.to.lat,
+    borderToLng: border.to.lng,
+  }
+};
 
 export const createSocket = (event: EventType): SocketIOClient.Socket => {
   return socketInit(createQueryParams(event));
