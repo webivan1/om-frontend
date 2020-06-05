@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { LatLngType } from "../../../../../websocket/src/app/types";
 import { EventType } from "../../../store/events/types";
 import { createSocket } from "../../Map/websocket";
 import { RootState } from "../../../store/store";
 import { UserStateType } from "../../../store/user/types";
-import { ComputeBoundsType } from "../../../services/coords/types";
+import { ComputeBoundsType, PointType } from "../../../services/coords/types";
 import { computeBounds } from "../../../services/coords/coords";
 import { isPointInPolygon } from "../../../helpers";
 
@@ -18,14 +17,14 @@ export const useDetectUser = (event: EventType) => {
   const { userUuid } = useSelector<RootState, UserStateType>(state => state.user);
 
   const [error, setError] = useState<string|null>(null);
-  const [position, setPosition] = useState<LatLngType|null>(null);
+  const [position, setPosition] = useState<PointType|null>(null);
   const [socket, setSocket] = useState<SocketIOClient.Socket|null>(null);
   const [online, setOnline] = useState<boolean>(false);
 
   const getPositionHandler = async () => {
     try {
       const { coords: { latitude, longitude } } = await getPosition();
-      const point: LatLngType = { lat: latitude, lng: longitude };
+      const point: PointType = { lat: latitude, lng: longitude };
       const border: ComputeBoundsType = computeBounds(event.region, event.region.distance);
 
       if (isPointInPolygon(point, border)) {
