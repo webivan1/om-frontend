@@ -3,6 +3,7 @@ import "./style/main.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { autoLoginAsync } from "./store/login/actions";
+import { Notification } from "./components/Notification/Notification";
 
 // Types
 import { RootState } from "./store/store";
@@ -34,8 +35,8 @@ export const App: FC = () => {
     <BrowserRouter>
       <main>
         <SideBar />
-
         <Login />
+        <Notification />
 
         <div id="content" className="px-md-5 pb-md-5">
           <Menu />

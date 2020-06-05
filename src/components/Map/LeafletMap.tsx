@@ -104,7 +104,6 @@ const attachEvents: AttachEventsType<L.Marker[]> = (event, socket, add, remove, 
 
   connectWebsocket(
     socket,
-    borders,
     setConnection,
     addPlacement,
     removePlacement,

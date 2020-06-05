@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { Spinner, Alert } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import { useEventDetail } from "./hooks/hookEventDetail";
-
 import { EventDetailWrapper } from "./EventDetailWrapper";
 import { Content } from "../../../Layouts/Content";
+import { SpinnerBlock } from "../../../UI/Spinner/Spinner";
 
 export const EventDetail: FC = () => {
 
@@ -14,7 +14,7 @@ export const EventDetail: FC = () => {
   }
 
   if (loader || !detail) {
-    return <Spinner animation="border" variant="primary" />;
+    return <SpinnerBlock />;
   }
 
   return (

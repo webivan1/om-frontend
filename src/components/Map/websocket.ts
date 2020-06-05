@@ -1,9 +1,10 @@
 import socketInit from "../../services/socket-io";
 import { SocketEmitEvents, SocketListenEvents } from "./constants";
-import { ComputeBoundsType } from "../../services/coords/types";
+import { computeBounds } from "../../services/coords/coords";
+
+// Types
 import { PointUserType } from "./types";
 import { EventType } from "../../store/events/types";
-import { computeBounds } from "../../services/coords/coords";
 
 export const createQueryParams = (event: EventType) => {
   const border = computeBounds({
@@ -30,14 +31,13 @@ export const createSocket = (event: EventType): SocketIOClient.Socket => {
 
 export function connectWebsocket(
   socket: SocketIOClient.Socket,
-  borders: ComputeBoundsType,
   setConnection: (connections: PointUserType[]) => void,
   addPlacement: (connection: PointUserType) => void,
   removePlacement: (connection: PointUserType) => void,
   setTotalConnections?: (total: number) => void
 ) {
   socket.emit(SocketEmitEvents.GET_TOTAL);
-  socket.emit(SocketEmitEvents.GET_ALL_CONNECTIONS, borders);
+  socket.emit(SocketEmitEvents.GET_ALL_CONNECTIONS);
 
   if (setTotalConnections) {
     socket.on(SocketListenEvents.TOTAL_CONNECTIONS, setTotalConnections);

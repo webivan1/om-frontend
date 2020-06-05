@@ -1,8 +1,9 @@
 import React, { FC } from "react";
-import { Spinner, Alert } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import { EventType } from "../../../../../store/events/types";
 import { useEventChart } from "./hooks/hookEventChart";
+import { SpinnerBlock } from "../../../../UI/Spinner/Spinner";
 
 type PropTypes = {
   event: EventType
@@ -13,7 +14,7 @@ export const EventChart: FC<PropTypes> = ({ event }: PropTypes) => {
   const { loader, totalMax, error, chartData } = useEventChart(event);
 
   if (loader) {
-    return <Spinner animation="border" variant="warning" />
+    return <SpinnerBlock />
   }
 
   if (error) {

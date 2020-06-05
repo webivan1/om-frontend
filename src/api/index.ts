@@ -2,35 +2,11 @@ import config from "./config";
 import { http, authHeaders } from "../services/http";
 
 // Types
+import { ApiConfigType } from "./types";
 import { RegionType } from "../store/regions/types";
-import { TokenType, UserModelType, UserResponseType } from "../store/user/types";
-import { LoginFormType } from "../store/login/types";
-import { EventFilterParamsType, EventListType } from "../store/events/profile/list/types";
-import { EventPublicListFilterType, EventPublicListType } from "../store/events/public/list/types";
-import { EventDetailResponseType } from "../store/events/public/detail/types";
-import { EventStatisticType } from "../store/eventStatistic/types";
-
-export type ApiConfigType = {
-  region: {
-    list: () => Promise<RegionType[]>
-  },
-  auth: {
-    login: (credentials: LoginFormType) => Promise<UserResponseType>,
-    checkToken: (token: TokenType) => Promise<UserModelType>
-  },
-  profile: {
-    events: {
-      list: (token: TokenType, page: number, form: EventFilterParamsType) => Promise<EventListType>
-    }
-  },
-  public: {
-    events: {
-      list: (page: number, form: EventPublicListFilterType) => Promise<EventPublicListType>,
-      detail: (id: number) => Promise<EventDetailResponseType>,
-      stat: (eventId: number) => Promise<EventStatisticType[]>
-    }
-  }
-}
+import { UserModelType, UserResponseType } from "../store/user/types";
+import { EventListType } from "../store/events/profile/list/types";
+import { ProfileEventCreateResponse } from "../store/events/profile/create/types";
 
 const api: ApiConfigType = {
   region: {
@@ -49,7 +25,19 @@ const api: ApiConfigType = {
     events: {
       list: (token, page, form) => http.post<EventListType>(`${config.root}/profile/event/list`, { page, ...form }, {
         headers: authHeaders(token.userId, token.token)
-      }).then(response => response.data)
+      }).then(response => response.data),
+
+      create: (token, form) => http.post<ProfileEventCreateResponse>(`${config.root}/profile/event/create`, form, {
+        headers: authHeaders(token.userId, token.token)
+      }).then(response => response.data),
+
+      detail: (token, id) => http.get(`${config.root}/profile/event/edit/${id}`, {
+        headers: authHeaders(token.userId, token.token)
+      }).then(response => response.data),
+
+      update: (token, id, form) => http.post(`${config.root}/profile/event/edit/${id}`, form, {
+        headers: authHeaders(token.userId, token.token)
+      }).then(response => response.data),
     }
   },
   public: {

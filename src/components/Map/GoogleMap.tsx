@@ -16,7 +16,7 @@ import {
   PropTypes
 } from "./types";
 
-export const Map: FC<PropTypes> = ({ event }: PropTypes) => {
+export const Map: FC<PropTypes> = ({ event, onSetTotal }: PropTypes) => {
 
   const { region: { lat, lng } } = event;
 
@@ -25,7 +25,8 @@ export const Map: FC<PropTypes> = ({ event }: PropTypes) => {
       event,
       socket,
       handlerAddMarkers,
-      handlerRemoveMarkers
+      handlerRemoveMarkers,
+      onSetTotal
     );
   });
 
@@ -65,7 +66,7 @@ export const Map: FC<PropTypes> = ({ event }: PropTypes) => {
   )
 };
 
-const attachEvents: AttachEventsType<google.maps.Marker[]> = (event, socket, add, remove) => {
+const attachEvents: AttachEventsType<google.maps.Marker[]> = (event, socket, add, remove, setTotal) => {
   const { region: { lat, lng, distance } } = event;
 
   const borders = computeBounds({ lat, lng }, distance);
@@ -88,7 +89,13 @@ const attachEvents: AttachEventsType<google.maps.Marker[]> = (event, socket, add
     }
   };
 
-  connectWebsocket(socket, borders, setConnection, addPlacement, removePlacement);
+  connectWebsocket(
+    socket,
+    setConnection,
+    addPlacement,
+    removePlacement,
+    setTotal
+  );
 }
 
 const createPoint = ({ lat, lng, id }: PointUserType): google.maps.Marker => {

@@ -1,5 +1,8 @@
+import UserModel from "./models/UserModel";
+
 export enum Roles {
   'admin' = 'admin',
+  'moderator' = 'moderator',
   'organizer' = 'organizer',
   'user' = 'user'
 };
@@ -8,7 +11,7 @@ export type UserModelType = {
   id: string;
   name: string;
   isVerified: boolean;
-  roles?: keyof typeof Roles;
+  roles: keyof typeof Roles;
 }
 
 export type UserType = {
@@ -18,10 +21,10 @@ export type UserType = {
 }
 
 export type UserStateType = {
-  user: UserModelType|null;
   token: string|null;
   expired: number|null;
   userUuid: string;
+  user: UserModelType|null;
 }
 
 export enum UserResponseStatuses {

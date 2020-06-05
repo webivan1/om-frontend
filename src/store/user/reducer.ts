@@ -2,6 +2,7 @@ import { createReducer, PayloadAction } from "@reduxjs/toolkit";
 import * as userActions from "./actions";
 import { UserStateType, UserType } from "./types";
 import { UserUuidService } from "../../services/user.uuid.service";
+import UserModel from "./models/UserModel";
 
 const initialState: UserStateType = {
   user: null,
@@ -15,6 +16,8 @@ export default createReducer(initialState, {
     state.user = action.payload.user;
     state.token = action.payload.token;
     state.expired = action.payload.expired;
+
+    UserModel.call(action.payload.user);
   },
   [userActions.clearUser.type]: (state: UserStateType) => {
     state.user = null;

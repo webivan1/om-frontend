@@ -19,8 +19,9 @@ export const List: FC = () => {
 
   if (region === null) {
     return (
-      <Alert variant="warning">
-        Подождите... <Spinner size="sm" animation="border" variant="dark" />
+      <Alert variant="warning" className="d-flex align-items-center">
+        <span>Подождите...</span>
+        <Spinner className="ml-auto" animation="border" variant="dark" />
       </Alert>
     );
   }

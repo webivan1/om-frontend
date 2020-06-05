@@ -19,7 +19,7 @@ export const DetectUser: FC<PropTypes> = ({ event }: PropTypes) => {
 
   return (
     <div className="mb-3">
-      <p>Мои координаты: {position?.lat}, {position?.lng}</p>
+      <p>Ваши координаты: {position?.lat.toFixed(4)}, {position?.lng.toFixed(4)}</p>
 
       {isOnline ? (
         <div>
@@ -34,7 +34,7 @@ export const DetectUser: FC<PropTypes> = ({ event }: PropTypes) => {
         </div>
       ) : (
         <Button onClick={onlineHandler} variant="success">
-          Хочу учавствовать!
+          Хочу участвовать!
         </Button>
       )}
     </div>

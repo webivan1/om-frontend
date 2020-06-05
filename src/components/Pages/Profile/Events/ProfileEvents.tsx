@@ -17,9 +17,9 @@ type HeadingPropTypes = {
 
 const Heading: FC<HeadingPropTypes> = ({ total, loader, reloadList }: HeadingPropTypes) => (
   <>
-    <h1 className="mb-4">
+    <h2 className="mb-4">
       Список мероприятий
-    </h1>
+    </h2>
 
     <div className="d-flex justify-content-between align-content-center mb-4">
       <p>Всего: <b>{total}</b></p>

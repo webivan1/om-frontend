@@ -17,7 +17,7 @@ import { YmapsProvider, Ymaps } from "./Ymaps";
 
 type MarkerType = ymaps.ObjectManagerFeatureType | ymaps.ObjectManagerCollectionType;
 
-export const Map: FC<PropTypes> = ({ event }: PropTypes) => {
+export const Map: FC<PropTypes> = ({ event, onSetTotal }: PropTypes) => {
 
   const { region: { lat, lng } } = event;
 
@@ -26,7 +26,8 @@ export const Map: FC<PropTypes> = ({ event }: PropTypes) => {
       event,
       socket,
       handlerAddMarkers,
-      handlerRemoveMarker
+      handlerRemoveMarker,
+      onSetTotal
     );
   });
 
@@ -66,7 +67,7 @@ export const Map: FC<PropTypes> = ({ event }: PropTypes) => {
   )
 };
 
-const attachEvents: AttachEventsType<MarkerType> = (event, socket, add, remove) => {
+const attachEvents: AttachEventsType<MarkerType> = (event, socket, add, remove, onSetTotal) => {
   const { region: { lat, lng, distance } } = event;
 
   const borders = computeBounds({ lat, lng }, distance);
@@ -92,7 +93,13 @@ const attachEvents: AttachEventsType<MarkerType> = (event, socket, add, remove) 
     remove(point);
   };
 
-  connectWebsocket(socket, borders, setConnection, addPlacement, removePlacement);
+  connectWebsocket(
+    socket,
+    setConnection,
+    addPlacement,
+    removePlacement,
+    onSetTotal
+  );
 }
 
 function createPoint(point: PointUserType): ymaps.ObjectManagerFeatureType {

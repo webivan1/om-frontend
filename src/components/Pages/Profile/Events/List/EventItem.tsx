@@ -51,7 +51,7 @@ export const EventItem: FC<PropTypes> = ({ item }: PropTypes) => {
   } = useEventItem(item);
 
   return (
-    <div className="border-top border-bottom border-light row py-sm-3 py-md-4 align-items-center justify-content-between">
+    <div className="border-top border-bottom border-light row py-3 py-md-4 align-items-center justify-content-between">
       <div className="col-md-2 mb-sm-2 mb-md-0">
         <Status
           item={item}
@@ -66,7 +66,7 @@ export const EventItem: FC<PropTypes> = ({ item }: PropTypes) => {
       <div className="col-md-auto text-uppercase mb-sm-2">
         {item.region.label} <small>{item.timezoneUTC}</small>
       </div>
-      <div className="col-md-auto mb-sm-2 mb-md-0">
+      <div className="col-md-auto mb-sm-2 mb-md-0 mb-xs-2">
         {begin.format('Do MMMM, c HH:mm')} - {end.format('HH:mm')}<br />
         <span>Длительность</span> {item.interval} ч.
       </div>
