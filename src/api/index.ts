@@ -39,7 +39,9 @@ const api: ApiConfigType = {
         headers: authHeaders(token.userId, token.token)
       }).then(response => response.data),
 
-      remove: (token, id) => http.delete(`${config.root}/profile/event/remove/${id}`),
+      remove: (token, id) => http.delete(`${config.root}/profile/event/remove/${id}`, {
+        headers: authHeaders(token.userId, token.token)
+      }),
     }
   },
   public: {

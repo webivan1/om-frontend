@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useEventItem } from "../hooks/hookEventItem";
+import { useEventRemove } from "../hooks/hookEventRemove";
 
 // Types
 import {
@@ -12,7 +13,6 @@ import {
   EventStatusLabels,
   EventType
 } from "../../../../../store/events/types";
-import { useEventList } from "../hooks/hookEventList";
 
 declare function confirm(message: string): boolean;
 
@@ -53,7 +53,7 @@ export const EventItem: FC<PropTypes> = ({ item }: PropTypes) => {
     begin, end, isStarted, isFinished, timeToMeeting, canEditable, canRemove
   } = useEventItem(item);
 
-  const { handleRemove: onRemove } = useEventList();
+  const { handleRemove: onRemove } = useEventRemove();
 
   const handleRemove = () => {
     if (confirm('Вы уверены?')) {
