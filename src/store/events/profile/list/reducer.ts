@@ -33,5 +33,8 @@ export default createReducer(initialState, {
   },
   [eventListActions.setSearchForm.type]: (state: EventListStateType, action: PayloadAction<EventFilterParamsType>) => {
     state.form = {...action.payload};
+  },
+  [eventListActions.deleteItemEvent.type]: (state: EventListStateType, action: PayloadAction<number>): void => {
+    state.items.splice(state.items.findIndex(({ id }) => id === action.payload), 1);
   }
 });

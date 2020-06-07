@@ -38,6 +38,8 @@ const api: ApiConfigType = {
       update: (token, id, form) => http.post(`${config.root}/profile/event/edit/${id}`, form, {
         headers: authHeaders(token.userId, token.token)
       }).then(response => response.data),
+
+      remove: (token, id) => http.delete(`${config.root}/profile/event/remove/${id}`),
     }
   },
   public: {

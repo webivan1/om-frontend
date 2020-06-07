@@ -24,6 +24,7 @@ export type ApiConfigType = {
       create: (token: TokenType, form: EventFormType) => Promise<ProfileEventCreateResponse>,
       update: (token: TokenType, id: number, form: EventFormType) => Promise<ProfileEventUpdateResponse>,
       detail: (token: TokenType, id: number) => Promise<EventType>,
+      remove: (token: TokenType, id: number) => Promise<void>
     }
   },
   public: {

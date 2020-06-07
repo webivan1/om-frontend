@@ -9,6 +9,7 @@ export const addToList = createAction<EventListType>('event-list-profile/add');
 export const setLoader = createAction<boolean>('event-list-profile/set-loader');
 export const setError = createAction<string>('event-list-profile/set-error');
 export const setSearchForm = createAction<EventFilterParamsType>('event-list-profile/set-search-form');
+export const deleteItemEvent = createAction<number>('event-list-profile/delete-item');
 
 export const loadListAsync = (
   page: number,
@@ -45,3 +46,21 @@ export const loadListAsync = (
     dispatch(setLoader(false));
   }
 };
+
+export const removeEventAsync = (id: number): AppThunk => async dispatch => {
+  dispatch(setLoader(true));
+
+  const storage = new StorageToken();
+  const token = storage.getToken();
+  const userId = storage.getUserId();
+
+  try {
+    if (!token || !userId) throw new Error('403');
+    await api.profile.events.remove({ token, userId }, id);
+    dispatch(deleteItemEvent(id));
+  } catch (e) {
+    dispatch(setError(e.message));
+  } finally {
+    dispatch(setLoader(false));
+  }
+}

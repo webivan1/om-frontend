@@ -12,6 +12,9 @@ import {
   EventStatusLabels,
   EventType
 } from "../../../../../store/events/types";
+import { useEventList } from "../hooks/hookEventList";
+
+declare function confirm(message: string): boolean;
 
 type PropTypes = {
   item: EventType;
@@ -50,6 +53,14 @@ export const EventItem: FC<PropTypes> = ({ item }: PropTypes) => {
     begin, end, isStarted, isFinished, timeToMeeting, canEditable, canRemove
   } = useEventItem(item);
 
+  const { handleRemove: onRemove } = useEventList();
+
+  const handleRemove = () => {
+    if (confirm('Вы уверены?')) {
+      onRemove(item.id);
+    }
+  }
+
   return (
     <div className="border-top border-bottom border-light row py-3 py-md-4 align-items-center justify-content-between">
       <div className="col-md-2 mb-sm-2 mb-md-0">
@@ -83,7 +94,7 @@ export const EventItem: FC<PropTypes> = ({ item }: PropTypes) => {
             </Button>
           ) : null}
           {canRemove ? (
-            <Button variant="danger" type="button">
+            <Button onClick={handleRemove} variant="danger" type="button">
               <FontAwesomeIcon icon={faTrash} />
             </Button>
           ) : null}

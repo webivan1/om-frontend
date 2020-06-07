@@ -1,8 +1,9 @@
 import React, { FC } from "react";
 import { Content } from "../../Layouts/Content";
+import { Heading } from "../../UI/Heading/Heading";
 
 export const Home: FC = () => (
   <Content>
-    <h1>Hello</h1>
+    <Heading>OurRights</Heading>
   </Content>
 )

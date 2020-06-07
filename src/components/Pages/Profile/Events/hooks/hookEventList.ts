@@ -6,7 +6,7 @@ import { EventFilterParamsType, EventListStateType } from "../../../../../store/
 import { RootState } from "../../../../../store/store";
 
 // Actions
-import { loadListAsync } from "../../../../../store/events/profile/list/actions";
+import { loadListAsync, removeEventAsync } from "../../../../../store/events/profile/list/actions";
 
 export type HookEventListResponse = {
   eventList: EventListStateType & {
@@ -16,6 +16,7 @@ export type HookEventListResponse = {
   handleChangePagination: (page: number) => void;
   handleNextPage: () => void;
   handleSearchForm: (data: EventFilterParamsType) => void;
+  handleRemove: (id: number) => void;
 };
 
 export const useEventList = (): HookEventListResponse => {
@@ -35,11 +36,16 @@ export const useEventList = (): HookEventListResponse => {
     handleReloadList()
   }, [dispatch]);
 
+  const handleRemove = (id: number) => {
+    dispatch(removeEventAsync(id));
+  };
+
   return {
     eventList: { ...eventList, lastPage },
     handleReloadList,
     handleChangePagination,
     handleNextPage,
-    handleSearchForm
+    handleSearchForm,
+    handleRemove
   };
 };
