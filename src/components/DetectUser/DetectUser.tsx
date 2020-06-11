@@ -10,7 +10,7 @@ type PropTypes = {
 export const DetectUser: FC<PropTypes> = ({ event }: PropTypes) => {
 
   const {
-    error, position, isOnline, offlineHandler, onlineHandler, getPositionHandler
+    error, position, isOnline, offlineHandler, onlineHandler
   } = useDetectUser(event);
 
   if (error) {

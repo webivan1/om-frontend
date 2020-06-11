@@ -9,29 +9,38 @@ import { EventDetailResponseType } from "../store/events/public/detail/types";
 import { EventStatisticType } from "../store/eventStatistic/types";
 import { ProfileEventUpdateResponse } from "../store/events/profile/update/types";
 import { EventType } from "../store/events/types";
+import { MessagesType } from "../store/chat/types";
+import { DonationFormType, DonationResponseType } from "../store/donation/types";
 
 export type ApiConfigType = {
   region: {
-    list: () => Promise<RegionType[]>
+    list: () => Promise<RegionType[]>;
   },
   auth: {
-    login: (credentials: LoginFormType) => Promise<UserResponseType>,
-    checkToken: (token: TokenType) => Promise<UserModelType>
+    login: (credentials: LoginFormType) => Promise<UserResponseType>;
+    checkToken: (token: TokenType) => Promise<UserModelType>;
   },
   profile: {
     events: {
-      list: (token: TokenType, page: number, form: EventFilterParamsType) => Promise<EventListType>,
-      create: (token: TokenType, form: EventFormType) => Promise<ProfileEventCreateResponse>,
-      update: (token: TokenType, id: number, form: EventFormType) => Promise<ProfileEventUpdateResponse>,
-      detail: (token: TokenType, id: number) => Promise<EventType>,
-      remove: (token: TokenType, id: number) => Promise<void>
+      list: (token: TokenType, page: number, form: EventFilterParamsType) => Promise<EventListType>;
+      create: (token: TokenType, form: EventFormType) => Promise<ProfileEventCreateResponse>;
+      update: (token: TokenType, id: number, form: EventFormType) => Promise<ProfileEventUpdateResponse>;
+      detail: (token: TokenType, id: number) => Promise<EventType>;
+      remove: (token: TokenType, id: number) => Promise<void>;
     }
   },
   public: {
     events: {
-      list: (page: number, form: EventPublicListFilterType) => Promise<EventPublicListType>,
-      detail: (id: number) => Promise<EventDetailResponseType>,
-      stat: (eventId: number) => Promise<EventStatisticType[]>
+      list: (page: number, form: EventPublicListFilterType) => Promise<EventPublicListType>;
+      detail: (id: number) => Promise<EventDetailResponseType>;
+      stat: (eventId: number) => Promise<EventStatisticType[]>;
+    },
+    chat: {
+      message: (eventId: number, page: number) => Promise<MessagesType>;
+      create: (token: TokenType, eventId: number, message: string) => Promise<void>;
+    },
+    donation: {
+      create: (form: DonationFormType) => Promise<DonationResponseType>;
     }
   }
 }

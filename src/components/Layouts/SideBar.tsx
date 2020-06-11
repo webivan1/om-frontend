@@ -4,10 +4,13 @@ import { NavLink, Link } from "react-router-dom";
 import { AnimationElement } from "../AnimationElement/AnimationElement";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useDonationModal } from "../Donation/hooks/hookDonationModal";
+import { DonationModal } from "../Donation/DonationModal";
 
 export const SideBar: FC = () => {
 
   const [isSidebar, toggleSidebar] = useState<boolean>(true);
+  const { open } = useDonationModal();
 
   const handleToggleSidebar = () => {
     toggleSidebar(prev => !prev);
@@ -15,6 +18,8 @@ export const SideBar: FC = () => {
 
   return (
     <>
+      <DonationModal />
+
       <nav id="sidebar" className={isSidebar ? 'active' : ''}>
         <div className="custom-menu">
           <button type="button" onClick={handleToggleSidebar}>
@@ -47,6 +52,7 @@ export const SideBar: FC = () => {
           <div className="sidebar-content-bottom text-center">
             <AnimationElement nameEvent="shake" delay={4} interval={10} iterations={5}>
               <Button
+                onClick={open}
                 variant="warning"
                 className="left-col-donate-button depth-1"
               >Donate</Button>

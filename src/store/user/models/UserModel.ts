@@ -1,4 +1,5 @@
 import { Roles, UserModelType } from "../types";
+import { EventType } from "../../events/types";
 
 export default class UserModel {
   private user: UserModelType;
@@ -37,5 +38,11 @@ export default class UserModel {
 
   canControlEvents(): boolean {
     return this.canRoles([Roles.admin, Roles.moderator, Roles.organizer]);
+  }
+
+  canUseChatEvent(event: EventType): boolean {
+    return this.canRoles([Roles.admin, Roles.moderator]) || (
+      this.canRoles([Roles.organizer]) && event.user.id === this.user.id
+    );
   }
 }

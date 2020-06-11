@@ -5,6 +5,9 @@ import user from "./user/reducer";
 import login from "./login/reducer";
 import { eventStat } from "./eventStatistic";
 import notification from "./notification/reducer";
+import chat from "./chat/reducer";
+import chatForm from "./chatForm/reducer";
+import donation from "./donation/reducer";
 import {
   profileEventList,
   publicEventList,
@@ -24,5 +27,8 @@ export default combineReducers({
   publicEventDetail,
   profileEventCreate,
   profileEventUpdate,
-  eventStat
+  eventStat,
+  chat,
+  chatForm,
+  donation
 });

@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../store/store";
 import { EventDetailStateType } from "../../../../../store/events/public/detail/types";
-import { fetchDetailAsync } from "../../../../../store/events/public/detail/actions";
+import { fetchDetailAsync, resetDetail } from "../../../../../store/events/public/detail/actions";
 import { useParams } from "react-router-dom";
-import { RouteParamsType, StatusEvent } from "../types";
-import { useEventItem } from "../../../Profile/Events/hooks/hookEventItem";
+import { RouteParamsType } from "../types";
 
 export type HookEventDetailType = EventDetailStateType;
 
@@ -17,6 +16,10 @@ export const useEventDetail = (): HookEventDetailType => {
 
   useEffect(() => {
     dispatch(fetchDetailAsync(+id));
+
+    return () => {
+      dispatch(resetDetail());
+    }
   }, [dispatch]);
 
   return {

@@ -53,7 +53,9 @@ export const useDetectUser = (event: EventType) => {
   }
 
   useEffect(() => {
-    getPositionHandler().then();
+    if (userUuid) {
+      getPositionHandler().then();
+    }
   }, [userUuid]);
 
   useEffect(() => {

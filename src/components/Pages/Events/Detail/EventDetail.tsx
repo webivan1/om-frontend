@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { Alert } from "react-bootstrap";
 import { useEventDetail } from "./hooks/hookEventDetail";
 import { EventDetailWrapper } from "./EventDetailWrapper";
-import { Content } from "../../../Layouts/Content";
 import { SpinnerBlock } from "../../../UI/Spinner/Spinner";
 
 export const EventDetail: FC = () => {
@@ -18,8 +17,8 @@ export const EventDetail: FC = () => {
   }
 
   return (
-    <Content>
+    <div className="container py-sm-3 py-md-5 content">
       <EventDetailWrapper event={detail} />
-    </Content>
+    </div>
   );
 };

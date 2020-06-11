@@ -22,4 +22,7 @@ export default createReducer(initialState, {
   [eventDetailActions.setLoader.type]: (state: EventDetailStateType, action: PayloadAction<boolean>) => {
     state.loader = action.payload;
   },
+  [eventDetailActions.resetDetail.type]: (state: EventDetailStateType) => {
+    state.detail = null;
+  },
 });

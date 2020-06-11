@@ -53,6 +53,18 @@ const api: ApiConfigType = {
         .then(response => response.data),
 
       stat: (eventId: number) => http.get(`${config.root}/event/view/${eventId}/stat`)
+        .then(response => response.data),
+    },
+    chat: {
+      message: (eventId: number, page: number) => http.get(`${config.root}/chat/messages/${eventId}?page=${page}`)
+        .then(response => response.data),
+
+      create: (token, eventId, message) => http.put(`${config.root}/chat/message/${eventId}/create`, { message }, {
+        headers: authHeaders(token.userId, token.token)
+      })
+    },
+    donation: {
+      create: (form) => http.post(`${config.root}/donation/create`, form)
         .then(response => response.data)
     }
   }

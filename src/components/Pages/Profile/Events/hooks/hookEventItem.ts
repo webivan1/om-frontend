@@ -17,8 +17,8 @@ export type HookEventFormSearchResponse = {
 };
 
 export const useEventItem = (item: EventType): HookEventFormSearchResponse => {
-  const begin = moment(new Date(item.startAt));
-  const end = moment(new Date(item.finishAt));
+  const begin = moment(new Date(item.startAt)).utcOffset(item.timezoneUTC);
+  const end = moment(new Date(item.finishAt)).utcOffset(item.timezoneUTC);
 
   const getFromNow = (): string => begin.fromNow();
   const getToFinish = (): string => end.fromNow();
@@ -36,7 +36,7 @@ export const useEventItem = (item: EventType): HookEventFormSearchResponse => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      const currentDate: number = moment().valueOf();
+      const currentDate: number = moment().utcOffset(item.timezoneUTC).valueOf();
 
       if (currentDate >= begin.valueOf() && currentDate < end.valueOf()) {
         setIsStarted(true);

@@ -9,6 +9,7 @@ import { EventDetailStatuses } from "./types";
 export const setDetail = createAction<EventType>('event-detail/set-detail');
 export const setError = createAction<string>('event-detail/set-error');
 export const setLoader = createAction<boolean>('event-detail/set-loader');
+export const resetDetail = createAction('event-detail/reset');
 
 export const fetchDetailAsync = (id: number): AppThunk => async dispatch => {
   dispatch(setLoader(true));
